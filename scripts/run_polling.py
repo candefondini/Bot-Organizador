@@ -13,7 +13,9 @@ from telegram.ext import (
     ContextTypes,
     filters,
 )
-
+#Este archivo conecta nuestro bot con Telegram: define los comandos,
+#maneja lo que escribe el usuario y delega toda la parte inteligente 
+# (entender intenciones, emociones, tareas y recordatorios) en la clase ChatManager
 from app.chat import ChatManager
 
 chat = ChatManager()
@@ -440,8 +442,7 @@ def main():
     )
 
     logging.info("🤖 Bot inteligente iniciado")
-    logging.info("📋 Tareas = para HOY (sin notificación)")
-    logging.info("⏰ Recordatorios = con aviso en momento específico")
+  
     app.run_polling()
 
 
