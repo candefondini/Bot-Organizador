@@ -1,3 +1,11 @@
+# app/utils.py
+# Este archivo contiene funciones auxiliares que usa todo el bot:
+# - Interpretación de fechas en lenguaje natural
+# - Manejo de la “base de datos” JSON
+# - Limpieza y parseo básico de tareas
+# - Categorización de sentimientos
+# - Utilidades generales de formato
+
 from datetime import datetime, timedelta
 import json
 import re
@@ -6,6 +14,8 @@ import dateparser
 
 
 def sentiment_bucket(score: float) -> str:
+    # Clasifica un valor numérico en positivo / neutral / negativo.
+    # Se usa para resumir el estado emocional del usuario.
     if score >= 0.25:
         return "positivo"
     if score <= -0.25:
@@ -13,6 +23,8 @@ def sentiment_bucket(score: float) -> str:
     return "neutral"
 
 
+# Palabras que determinan prioridad cuando GPT falla.
+# Por ejemplo: “urgente” → prioridad 3.
 PRIORITY_WORDS = {
     "urgente": 3,
     "importante": 2,
@@ -24,27 +36,32 @@ PRIORITY_WORDS = {
 
 
 def load_db(path: str) -> dict:
+    # Carga el archivo JSON donde se guarda la información de los usuarios.
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
 
+    # Si el archivo no existe, lo crea con la estructura inicial.
     if not p.exists():
         with p.open("w", encoding="utf-8") as f:
             json.dump({"users": {}}, f, ensure_ascii=False, indent=2)
 
+    # Devuelve el diccionario del archivo JSON.
     with p.open("r", encoding="utf-8") as f:
         return json.load(f)
 
 
 def save_db(path: str, data: dict) -> None:
+    # Guarda el diccionario de datos en el archivo JSON.
     p = Path(path)
     with p.open("w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
 def ensure_user(db: dict, user_id: str) -> dict:
+    # Garantiza que el usuario exista dentro del archivo JSON.
+    # Si no existe, crea la estructura por defecto.
     users = db.setdefault("users", {})
 
-    # Valores por defecto del usuario
     default_user = {
         "tasks": [],
         "reminders": [],          
@@ -53,9 +70,10 @@ def ensure_user(db: dict, user_id: str) -> dict:
         "last_added_task": None,
     }
 
+    # Obtiene o crea la entrada del usuario.
     user = users.setdefault(user_id, default_user)
 
-    # Por si hay usuarios viejos guardados sin 'reminders', lo agregamos igual
+    # Compatibilidad con versiones viejas del bot que no tenían reminders.
     if "reminders" not in user:
         user["reminders"] = []
 
@@ -64,13 +82,20 @@ def ensure_user(db: dict, user_id: str) -> dict:
 
 def parse_datetime_in_text(text: str) -> datetime | None:
     """
-    Parsea expresiones de tiempo en texto natural.
-    SIEMPRE devuelve fechas/horas FUTURAS.
+    Convierte expresiones de tiempo del tipo:
+    - "en 5 minutos"
+    - "a las 18"
+    - "mañana a las 10"
+    - "viernes 14:30"
+    - "en un minuto"
+    
+    Devuelve SIEMPRE una fecha/hora FUTURA.
+    Si algo no se puede interpretar, devuelve None.
     """
     lower = text.lower().strip()
     now = datetime.now()
 
-    # 1) "en un minuto / en 10 minutos / en 30 segundos / en 2 horas"
+    # 1) Expresiones del tipo "en X minutos/horas/segundos"
     m = re.search(r"en\s+(un|una|\d+)\s+(segundos?|minutos?|minuto|segundo|horas?|hora)", lower)
     if m:
         raw = m.group(1)
@@ -85,7 +110,7 @@ def parse_datetime_in_text(text: str) -> datetime | None:
         elif unit.startswith("hora"):
             return now + timedelta(hours=n)
 
-    # 2) "a las 17hs" / "a las 17 hs" / "a las 17:30"
+    # 2) Expresiones del tipo "a las 17", "a las 17:30", con o sin 'hs'
     m = re.search(
         r"a las\s+(\d{1,2})(?:[:h](\d{2}))?\s*h?s?",
         lower,
@@ -96,49 +121,52 @@ def parse_datetime_in_text(text: str) -> datetime | None:
         
         target = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
         
-        # Si la hora ya pasó hoy, ponerla para mañana
+        # Si la hora ya pasó hoy, lo agenda para mañana.
         if target <= now:
             target = target + timedelta(days=1)
         
         return target
 
-    # 3) Intentar con dateparser (maneja "mañana a las 17", "viernes 10:30", etc.)
+    # 3) Como último recurso, usar dateparser para entender frases más complejas.
     dt = dateparser.parse(
         lower, 
         languages=["es"],
         settings={
-            'PREFER_DATES_FROM': 'future',  # Preferir fechas futuras
+            'PREFER_DATES_FROM': 'future',  # Siempre preferir futuro
             'RELATIVE_BASE': now
         }
     )
     
     if dt:
-        # Si dateparser devolvió una fecha pasada, ajustarla
+        # Ajuste por si dateparser devolvió una hora pasada
         if dt <= now:
-            # Si es solo hora sin fecha explícita, moverla al día siguiente
             if "mañana" not in lower and "ayer" not in lower and any(x in lower for x in ["a las", ":", "hs"]):
                 dt = dt + timedelta(days=1)
         
         return dt
 
+    # Si no se pudo interpretar nada
     return None
 
 
 def parse_task_nl(text: str) -> dict:
     """
-    Fallback simple para parsear tareas cuando GPT falla.
-    Las tareas ya NO tienen fecha (son del día actual).
+    Analizador básico de tareas cuando GPT falla.
+    - Detecta prioridad por palabras
+    - Limpia expresiones como "recordame", "tengo que"
+    - Devuelve un título simple y una prioridad
     """
     lower = text.lower().strip()
 
     priority = 1
+    # Busca palabras que indiquen prioridad
     for w, p in PRIORITY_WORDS.items():
         if w in lower:
             priority = p
 
     title = lower
 
-    # Limpiar palabras innecesarias
+    # Quitamos palabras típicas que no aportan al título
     title = re.sub(
         r"\b(recordame|avisame|ponelo|agendalo|tengo que|debo|necesito que|hoy)\b",
         "",
@@ -150,14 +178,14 @@ def parse_task_nl(text: str) -> dict:
     if not title:
         title = "Tarea"
 
-    # Capitalizar un poco
+    # Capitalizar primera letra
     title = title[0].upper() + title[1:] if title else title
 
     return {"title": title, "priority": priority}
 
 
 def friendly_due(due_iso: str | None) -> str:
-    """Convierte un datetime ISO a formato legible"""
+    """Convierte una fecha ISO (2025-11-16T17:30:00) en formato legible: DD/MM HH:MM"""
     if not due_iso:
         return "sin fecha"
     try:

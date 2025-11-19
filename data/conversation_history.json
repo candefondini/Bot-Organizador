@@ -1,183 +1,34 @@
 {
   "users": {
-    "5280200409": {
-      "tasks": [
-        {
-          "title": "Entregar informe de sistemas de inmediato",
-          "due": null,
-          "priority": 1,
-          "created_at": "2025-11-15T19:19:25.006160",
-          "done": false
-        }
-      ],
-      "moods": [],
-      "history": [
-        {
-          "ts": "2025-11-15T19:19:25.006178",
-          "type": "task_add",
-          "raw": "recordame entregar lo de sistemas en 10 segundos",
-          "parsed": {
-            "title": "Entregar informe de sistemas de inmediato",
-            "due": null,
-            "priority": 1,
-            "created_at": "2025-11-15T19:19:25.006160",
-            "done": false
-          }
-        }
-      ]
-    },
     "6591309791": {
-      "tasks": [
+      "tasks": [],
+      "reminders": [],
+      "moods": [
         {
-          "title": "Pasear al perro en 10 segundos",
-          "due": null,
-          "priority": 1,
-          "created_at": "2025-11-15T19:19:33.677043",
-          "done": true
+          "ts": "2025-11-18T22:31:47.564845",
+          "score": 0.0,
+          "text": "recordame en 1 min que tengo que pushear mi codigo"
         },
         {
-          "title": "Pasear al perro en 10 segundos",
-          "due": null,
-          "priority": 1,
-          "created_at": "2025-11-15T19:20:11.915035",
-          "done": false
-        },
-        {
-          "title": "Consulta sobre mis tareas pendientes",
-          "due": null,
-          "priority": 1,
-          "created_at": "2025-11-16T00:50:40.284702",
-          "done": false
-        },
-        {
-          "title": "Estudio rápido de sistemas en un minuto",
-          "due": "2025-11-16T01:32:35.361814",
-          "priority": 1,
-          "created_at": "2025-11-16T01:31:39.208012",
-          "done": false,
-          "last_reminder_date": "2025-11-16"
-        },
-        {
-          "title": "Trabajo individual sobre sistemas inteligentes",
-          "due": null,
-          "priority": 1,
-          "created_at": "2025-11-16T01:42:32.315886",
-          "done": false
-        },
-        {
-          "title": "Recordatorio para comprar pan en un minuto.",
-          "due": "2025-11-16T15:59:47.826698",
-          "priority": 1,
-          "created_at": "2025-11-16T15:55:48.846493",
-          "done": true,
-          "last_reminder_date": "2025-11-16"
-        },
-        {
-          "title": "Entregar un trabajo de sistemas inteligentes, tambien hacer un ajuste de una web, rendir y limpiar mi casa, todo hoy",
-          "due": "2025-11-16T17:44:48.401838",
-          "priority": 1,
-          "created_at": "2025-11-16T17:43:19.702613",
-          "done": true,
-          "last_reminder_date": "2025-11-16"
-        },
-        {
-          "title": "Bañar a mi perro hs",
-          "due": null,
-          "priority": 1,
-          "created_at": "2025-11-16T17:51:32.260289",
-          "done": false
-        },
-        {
-          "title": "Entregar un trabajo de programacion  hoy",
-          "due": "2025-11-16T17:00:00",
-          "priority": 1,
-          "created_at": "2025-11-16T18:01:28.917352",
-          "done": false,
-          "last_reminder_date": "2025-11-16"
-        },
-        {
-          "title": "Ir a pasear en 1 minuto",
-          "due": "2025-11-16T18:11:43.174936",
-          "priority": 1,
-          "created_at": "2025-11-16T18:10:43.175325",
-          "done": false,
-          "last_reminder_date": "2025-11-16"
+          "ts": "2025-11-18T22:33:28.844430",
+          "score": 0.5,
+          "text": "genial"
         }
       ],
-      "moods": [],
       "history": [
         {
-          "ts": "2025-11-15T19:19:33.677054",
-          "type": "task_add",
-          "raw": "recordame sacar a pasear a mi perro en 10 segundos",
+          "ts": "2025-11-18T22:31:49.204238",
+          "type": "reminder_add",
+          "raw": "recordame en 1 min que tengo que pushear mi codigo",
           "parsed": {
-            "title": "Pasear al perro en 10 segundos",
-            "due": null,
-            "priority": 1,
-            "created_at": "2025-11-15T19:19:33.677043",
-            "done": false
+            "title": "Pushear mi código",
+            "remind_datetime": "2025-11-18T22:32:49.153249",
+            "created_at": "2025-11-18T22:31:49.204238",
+            "reminded": false
           }
-        },
-        {
-          "ts": "2025-11-15T19:20:11.915045",
-          "type": "task_add",
-          "raw": "recordame sacar a pasear a mi perro en 10 segundos",
-          "parsed": {
-            "title": "Pasear al perro en 10 segundos",
-            "due": null,
-            "priority": 1,
-            "created_at": "2025-11-15T19:20:11.915035",
-            "done": false
-          }
-        },
-        {
-          "ts": "2025-11-16T00:50:40.284715",
-          "type": "task_add",
-          "raw": "hola me decis mis tareas de hoy porfa",
-          "parsed": {
-            "title": "Consulta sobre mis tareas pendientes",
-            "due": null,
-            "priority": 1,
-            "created_at": "2025-11-16T00:50:40.284702",
-            "done": false
-          }
-        },
-        {
-          "ts": "2025-11-16T00:53:58.391846",
-          "type": "task_done",
-          "idx": 0
-        },
-        {
-          "ts": "2025-11-16T01:31:39.208033",
-          "type": "task_add",
-          "raw": "recordame en 1 minuto estudiar sistemas",
-          "parsed": {
-            "title": "Estudio rápido de sistemas en un minuto",
-            "due": "2025-11-16T01:32:35.361814",
-            "priority": 1,
-            "created_at": "2025-11-16T01:31:39.208012",
-            "done": false
-          }
-        },
-        {
-          "ts": "2025-11-16T01:42:32.315903",
-          "type": "task_add",
-          "raw": "mañana tengo que hacer el trabajo individual de sistemas inteligentes recordamelo",
-          "parsed": {
-            "title": "Trabajo individual sobre sistemas inteligentes",
-            "due": null,
-            "priority": 1,
-            "created_at": "2025-11-16T01:42:32.315886",
-            "done": false
-          }
-        },
-        {
-          "ts": "2025-11-16T15:55:48.846509",
-          "type": "task_add",
-          "raw": "bien, necesito que en un minuto me recuerdes ir a comprar pan"
         }
       ],
-      "last_added_task": 9
+      "last_added_task": null
     }
   }
 }

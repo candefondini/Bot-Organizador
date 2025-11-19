@@ -1,1 +1,1 @@
-# Hace que la carpeta sea un módulo de Python
+# Permite las importaciones entre archivos
