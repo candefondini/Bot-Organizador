@@ -9,7 +9,7 @@
 
 from datetime import datetime, timedelta
 import re
-from openai import OpenAI
+from groq import Groq
 from typing import Tuple, Optional, Dict, List
 import json
 
@@ -32,9 +32,9 @@ class ChatManager:
         # Ruta del archivo de base de datos (JSON). Si no se pasa, usa la ruta por defecto.
         self.data_path = data_path or Config.DATA_PATH
         # Cliente de OpenAI configurado con la API key
-        self.client = OpenAI(api_key=Config.OPENAI_API_KEY)
-        # Modelo de OpenAI a utilizar (por defecto, configurado en Config)
-        self.model = Config.OPENAI_MODEL
+        self.client = Groq(api_key=Config.GROQ_API_KEY)
+        self.model = Config.GROQ_MODEL
+
 
     def _db(self):
         # Abre y devuelve la "base de datos" (archivo JSON con info de usuarios)

@@ -29,6 +29,150 @@
         }
       ],
       "last_added_task": null
+    },
+    "5280200409": {
+      "tasks": [
+        {
+          "title": "Sacar la basura",
+          "priority": 2,
+          "notes": "",
+          "created_at": "2025-11-19T14:43:58.770616",
+          "done": true,
+          "completed_at": "2025-11-25T16:29:05.636965"
+        },
+        {
+          "title": "Ordenar la habitación",
+          "priority": 2,
+          "notes": "",
+          "created_at": "2025-11-19T14:43:58.770616",
+          "done": true,
+          "completed_at": "2025-11-25T16:29:05.636965"
+        },
+        {
+          "title": "Entregar la egi de sistemas",
+          "priority": 1,
+          "notes": "",
+          "created_at": "2025-11-19T14:43:58.770616",
+          "done": true,
+          "completed_at": "2025-11-25T16:29:05.636965"
+        },
+        {
+          "title": "Crear apuntes de programación para celulares",
+          "priority": 2,
+          "notes": "",
+          "created_at": "2025-11-25T16:30:09.882117",
+          "done": true,
+          "completed_at": "2025-11-25T16:34:05.732227"
+        },
+        {
+          "title": "Pasear al perro",
+          "priority": 1,
+          "notes": "",
+          "created_at": "2025-11-25T16:30:09.882117",
+          "done": true,
+          "completed_at": "2025-11-25T16:34:05.732227"
+        },
+        {
+          "title": "Sacar la basura",
+          "priority": 1,
+          "notes": "",
+          "created_at": "2025-11-25T16:30:09.882117",
+          "done": true,
+          "completed_at": "2025-11-25T16:34:05.732227"
+        }
+      ],
+      "reminders": [
+        {
+          "title": "Sacar la basura",
+          "remind_datetime": "2025-11-25T22:00:00",
+          "created_at": "2025-11-25T16:30:23.149134",
+          "reminded": false
+        }
+      ],
+      "moods": [
+        {
+          "ts": "2025-11-25T16:29:05.631416",
+          "score": 0.2,
+          "text": "marcalas todas como completadas"
+        },
+        {
+          "ts": "2025-11-25T16:30:22.793473",
+          "score": 0.0,
+          "text": "haceme acordar de sacar la basura a las 21 hs"
+        },
+        {
+          "ts": "2025-11-25T16:30:35.953920",
+          "score": 0.0,
+          "text": "me mostrar mis recordatorios programados"
+        },
+        {
+          "ts": "2025-11-25T16:30:46.931762",
+          "score": 0.2,
+          "text": "me mostras mis tareas pendientes"
+        },
+        {
+          "ts": "2025-11-25T16:31:37.338289",
+          "score": 0.2,
+          "text": "me moves el recordatorio de sacar la basura de las 21 a las 22?"
+        },
+        {
+          "ts": "2025-11-25T16:31:51.993316",
+          "score": 0.2,
+          "text": "me eliminás las tareas completadas?"
+        },
+        {
+          "ts": "2025-11-25T16:32:18.690907",
+          "score": 0.0,
+          "text": "recordame tomar agua en un minuto"
+        }
+      ],
+      "history": [
+        {
+          "ts": "2025-11-19T14:43:58.770616",
+          "type": "multiple_tasks_add",
+          "raw": "hoy tengo que:\n1. Sacar la basura\n2. Ordenar mi pieza\n3. entregar la egi de sistemas",
+          "count": 3
+        },
+        {
+          "ts": "2025-11-25T16:29:05.636965",
+          "type": "mark_all_done",
+          "count": 3
+        },
+        {
+          "ts": "2025-11-25T16:30:09.882117",
+          "type": "multiple_tasks_add",
+          "raw": "hoy tengo que:\n1. Hacer apuntes para programación para celulares\n2. Sacar a pasear al perro\n3. Sacar la basura",
+          "count": 3
+        },
+        {
+          "ts": "2025-11-25T16:30:23.149134",
+          "type": "reminder_add",
+          "raw": "haceme acordar de sacar la basura a las 21 hs",
+          "parsed": {
+            "title": "Sacar la basura",
+            "remind_datetime": "2025-11-25T21:00:00",
+            "created_at": "2025-11-25T16:30:23.149134",
+            "reminded": false
+          }
+        },
+        {
+          "ts": "2025-11-25T16:32:19.112257",
+          "type": "reminder_add",
+          "raw": "recordame tomar agua en un minuto",
+          "parsed": {
+            "title": "Tomar agua",
+            "remind_datetime": "2025-11-25T16:33:19.112217",
+            "created_at": "2025-11-25T16:32:19.112257",
+            "reminded": false
+          }
+        },
+        {
+          "ts": "2025-11-25T16:34:05.732227",
+          "type": "mark_all_done",
+          "count": 3
+        }
+      ],
+      "last_added_task": 5
     }
   }
 }
